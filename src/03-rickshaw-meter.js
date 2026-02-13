@@ -51,12 +51,20 @@
  *   findCheapestAndCostliest(150, 80, 200) // => { cheapest: 80, costliest: 200 }
  */
 export function parseFare(fareString) {
-  // Your code here
+  if (typeof fareString !== "string" || fareString.trim() === "") {
+    return -1;
+  }
+
+  const fare = Number(fareString);
+
+  if (isNaN(fare)) {
+    return -1;
+  }
+
+  return fare;
 }
 
-export function roundFare(amount, decimalPlaces) {
-  // Your code here
-}
+export function roundFare(amount, decimalPlaces) {}
 
 export function calculateSurge(baseFare, surgeMultiplier) {
   // Your code here

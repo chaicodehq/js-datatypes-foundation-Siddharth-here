@@ -63,16 +63,26 @@ export function extractRangoliCenter(design, start, end) {
 }
 
 export function splitAndJoinRangoli(colorString, oldSep, newSep) {
-  if(typeof colorString !== "string"){
+  if(typeof colorString !== "string" || typeof oldSep !== "string" || typeof newSep !== "string"){
     return ""
   }
+  return colorString.split(oldSep).join(newSep);
 
 }
 
 export function replaceRangoliColor(design, oldColor, newColor) {
-  // Your code here
+  
+  if (typeof design !== "string" || typeof oldColor !== "string" || typeof newColor !== "string") {
+    return "";
+  } 
+
+  
+  return design.replaceAll(oldColor, newColor);
 }
 
 export function makeRangoliBorder(char, length) {
-  // Your code here
+  if(typeof char !== "string" || typeof length !== "number" || length <= 0 || !Number.isInteger(length)){
+    return "";
+  }
+  return char.repeat(Math.ceil(length / char.length)).slice(0, length);
 }
