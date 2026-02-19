@@ -64,16 +64,56 @@ export function parseFare(fareString) {
   return fare;
 }
 
-export function roundFare(amount, decimalPlaces) {}
+export function roundFare(amount, decimalPlaces) {
+  if (
+    typeof amount !== "number" ||
+    typeof decimalPlaces !== "number" ||
+    decimalPlaces < 0 ||
+    !Number.isInteger(decimalPlaces)
+  ) {
+    return "";
+  }
+
+  return amount.toFixed(decimalPlaces);
+}
 
 export function calculateSurge(baseFare, surgeMultiplier) {
-  // Your code here
+  if (
+    typeof baseFare !== "number" ||
+    typeof surgeMultiplier !== "number" ||
+    Number.isNaN(baseFare) ||
+    Number.isNaN(surgeMultiplier) ||
+    baseFare <= 0 ||
+    surgeMultiplier <= 0
+  ) {
+    return 0;
+  }
+  return Math.ceil(baseFare * surgeMultiplier);
 }
 
 export function findCheapestAndCostliest(...fares) {
-  // Your code here
+  const validFares = fares.filter((fare) => typeof fare === "number");
+
+  if (validFares.length === 0) {
+    return null;
+  }
+
+  const cheapest = Math.min(...validFares);
+  const costliest = Math.max(...validFares);
+
+  return {
+    cheapest: cheapest,
+    costliest: costliest,
+  };
 }
 
 export function getDistanceDifference(from, to) {
-  // Your code here
+  const start = parseInt(from);
+  const end = parseInt(to);
+
+  if (Number.isNaN(start) || Number.isNaN(end)) {
+    return -1;
+  }
+
+  return Math.abs(start - end);
 }
